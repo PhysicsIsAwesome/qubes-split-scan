@@ -1,7 +1,17 @@
 # qubes-split-scan
 Split-scan setup for Qubes OS using Salt
 
-This project provides a split-scan setup for Qubes OS, similar to the [other split setups](https://forum.qubes-os.org/t/split-everything-collection-of-how-to-guides-for-split-configurations/11480). You can apply it using Salt. If you are not familiar with Salt, the files should still be relatively easy to understand, allowing you to apply the configuration manually.
+This project provides a split-scan setup for Qubes OS, similar to the [other split setups](https://forum.qubes-os.org/t/split-everything-collection-of-how-to-guides-for-split-configurations/11480). 
+
+Split-scan creates a client-server qube architecture for scanners.
+
+Scanners get connected, installed and set up only in the server qube. It does not matter whether usb, network or other scanner type.
+
+Multiple clients can then connect to this server qube via qrexec to use the scanner, even offline qubes. Since only the server qube needs direct access to the scanner, clients don’t need usb, network or other access to use the scanner and also don’t need hardware-specific software installed, like hplip.
+
+Scanner access gets mediated by qubes policy rules, respectively looks for the tag `scan-client`, for which a rule in above repo is already implemented.
+
+You can apply it using Salt. If you are not familiar with Salt, the files should still be relatively easy to understand, allowing you to apply the configuration manually.
 
 This setup creates:
 - server template `debian-13-scan-server`
